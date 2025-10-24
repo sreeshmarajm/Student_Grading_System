@@ -1,0 +1,64 @@
+﻿@model IEnumerable<StudentGradingSystem.Models.StudentGradeViewModel>
+
+@{
+    ViewData["Title"] = "Student Grades";
+    var currentSearch = ViewData["CurrentSearch"] as string;
+    var currentFilter = ViewData["CurrentFilter"] as string ?? "All";
+}
+
+<h1 style="font-family:'Times New Roman', Times, serif;color:darkblue">Student List</h1>
+<br />
+<div class="row">
+    
+<form method="get" class="form-inline mb-3 d-flex align-items-center">
+    <div class="col-md-4">
+    <input type="text"
+           name="search"
+           value="@currentSearch"
+           placeholder="Search student name"
+           class="form-control"
+            />
+    </div>
+    <div class="col-md-4">
+    <select name="filter" class="form-control">
+        <option value="All" selected="@(currentFilter=="All")">All</option>
+        <option value="PASS" selected="@(currentFilter=="PASS")">PASS</option>
+        <option value="FAIL" selected="@(currentFilter=="FAIL")">FAIL</option>
+    </select>
+    </div>&nbsp&nbsp
+    <div class="col-md-4">
+    <button type="submit" class="btn btn-primary">Search / Filter</button>
+    </div>
+</form>
+</div>
+
+<br />
+<a asp-action="Create" class="btn btn-success">Create New</a>&nbsp;&nbsp;
+<a href="@Url.Action("Index", "Subjects")" class="btn btn-secondary">Go To Subjects</a><br /><br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Remarks</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StudentName</td>
+                <td>@item.SubjectName</td>
+                <td>@item.Grade</td>
+                <td>@item.Remarks</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+                    
+                    <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

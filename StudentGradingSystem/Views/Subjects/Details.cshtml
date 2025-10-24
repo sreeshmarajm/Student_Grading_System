@@ -1,0 +1,24 @@
+﻿@model StudentGradingSystem.Models.Subject
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 style="font-family:'Times New Roman', Times, serif;color:darkblue">Details</h1>
+
+<div>
+    <h4>Subject</h4>
+    <hr /><br />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.SubjectId">Edit</a> &nbsp;&nbsp;
+    <a asp-action="Index">Back to List</a>
+</div>
